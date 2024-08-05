@@ -5,12 +5,15 @@ window.addEventListener("load", function() {
     let form = document.querySelector("form"); 
     
     form.addEventListener("submit", function(event){
+        event.preventDefault();
         let pilotNameInput = document.querySelector("input[name=pilotName]").value;
         let copilotNameInput = document.querySelector("input[name=copilotName]").value;
         let fuelLevelInput = document.querySelector("input[name=fuelLevel]").value;
         let cargoMassInput = document.querySelector("input[name=cargoMass]").value;
+        let requirementsList = document.getElementById("faultyItems").children[0].children;
+        let htmlDoc = document;
         
-        formSubmission(document, 'list', pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput);
+        formSubmission(htmlDoc, requirementsList, pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput);
     });
 
     let listedPlanets;

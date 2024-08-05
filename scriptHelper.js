@@ -28,20 +28,63 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+    //validations
     let inputs = [pilot, copilot, fuelLevel, cargoMass];
     for (let i = 0; i < inputs.length; i++) {
         if (validateInput(inputs[i]) === "Empty") {
-            alert("All fields are required!");
-            return event.preventDefault();
+            return alert("All fields are required!");
+            
         }
     }
-    
     if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" 
     || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoMass) === "Not a Number") {
-        alert("Make sure to enter valid information for each field");
-            return event.preventDefault();
+        return alert("Make sure to enter valid information for each field");
+        
+            
     } 
+   //list update
+    console.log("made it past validation");
+   let goodFuelStatus = 'Fuel level high enough for launch';
+   let goodCargoStatus = 'Cargo mass low enough for launch';
+   list[0].innerHTML = `${pilot} is ready for launch`;
+   list[1].innerHTML = `${copilot} is ready for launch`;
+
+   document.getElementById("faultyItems").style.visibility = "visible";
+
+   if (fuelLevel < 10000 || cargoMass > 10000) {
+    document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
+    document.getElementById("launchStatus").style.color = "red";
+   } else {
+    document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
+    document.getElementById("launchStatus").style.color = "green";
+
+   }
+
+   if (fuelLevel < 10000) {
+    
+    list[2].innerHTML = `Fuel level too low for launch`;
+    /*document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
+    document.getElementById("launchStatus").style.color = "red";*/
+
+   } else if (fuelLevel >= 10000) {
+    list[2].innerHTML = `${goodFuelStatus}`;
+    /*document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
+    document.getElementById("launchStatus").style.color = "green";*/
+
+    }
+
+   if (cargoMass > 10000) {
+    //document.getElementById("faultyItems").style.visibility = "visible";
+    list[3].innerHTML = `Cargo mass too high for launch`;
+    /*document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
+    document.getElementById("launchStatus").style.color = "red";*/
+  
+    } else if (cargoMass <= 10000) {
+    list[3].innerHTML = `${goodCargoStatus}`;
+    /*document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
+    document.getElementById("launchStatus").style.color = "green";*/
    
+    }
 
  }
  
