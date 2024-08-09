@@ -43,7 +43,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             
     } 
    //list update
-   console.log("made it past validation");
+   
    let goodFuelStatus = 'Fuel level high enough for launch';
    let goodCargoStatus = 'Cargo mass low enough for launch';
    list = list.children[0].children;
@@ -93,8 +93,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  async function myFetch() {
      let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
-         });
+     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        response.json();     
+    });
  
      return planetsReturned;
  }
