@@ -4,17 +4,18 @@ require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
-    /*
+    let missionTarget = document.getElementById("missionTarget");
+    missionTarget.innerHTML = `
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name}</li>
+                     <li>Diameter: ${diameter}</li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance}</li>
+                     <li>Number of Moons: ${moons}</li>
                  </ol>
-                 <img src="">
-    */
+                 <img src="${imageUrl}">`
+    
  }
  
  function validateInput(testInput) {
@@ -59,33 +60,18 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    } else {
     document.getElementById("launchStatus").innerHTML = "Shuttle is Ready for Launch";
     document.getElementById("launchStatus").style.color = "green";
-
    }
 
    if (fuelLevel < 10000) {
-    
     list[2].innerHTML = `Fuel level too low for launch`;
-    /*document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
-    document.getElementById("launchStatus").style.color = "red";*/
-
    } else if (fuelLevel >= 10000) {
     list[2].innerHTML = `${goodFuelStatus}`;
-    /*document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
-    document.getElementById("launchStatus").style.color = "green";*/
-
     }
 
    if (cargoMass > 10000) {
-    //document.getElementById("faultyItems").style.visibility = "visible";
     list[3].innerHTML = `Cargo mass too heavy for launch`;
-    /*document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
-    document.getElementById("launchStatus").style.color = "red";*/
-  
     } else if (cargoMass <= 10000) {
     list[3].innerHTML = `${goodCargoStatus}`;
-    /*document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch";
-    document.getElementById("launchStatus").style.color = "green";*/
-   
     }
 
  }
@@ -101,6 +87,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function pickPlanet(planets) {
+    let i = Math.round(Math.random()*5);
+    return planets[i];
+
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
